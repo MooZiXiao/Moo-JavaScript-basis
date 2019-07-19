@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>狗蛋在线为你服务</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //创建狗蛋的自定义函数
+    function GouDan(){
+        //创建狗蛋提示方法
+        this.ask=function(){
+            var msg=prompt("请根据下面选项选择输入\n1：求和\n2：时间\n3：笑话\nq：退出");
+            return msg;
+        },
+        //求和
+        this.sum=function(){
+            var getNum=prompt("请输入要求和的数据：（数值与数值间用逗号隔开）\n例如：1，2，3");
+            var getAllSum=getNum.split(",");
+            var getSum=0;
+            for(var i=0; i<getAllSum.length; i++){
+                getSum += parseInt(getAllSum[i]);
+            }
+            alert(getSum);
+        },
+        //时间
+        this.checkTime=function (i){
+            if(i<10){
+                return "0"+i;
+            }else{
+                return i;
+            }
+        },
+        this.time=function(){
+            var td=new Date();
+            var y=td.getFullYear();
+            var M=td.getMonth()+1;
+            var d=td.getDate();
+            var h=td.getHours();
+            var m=td.getMinutes();
+            var s=td.getSeconds();
+            //创建 checkTime来设置时间显示格式
+            M=this.checkTime(M); 
+            //若调用checkTime函数没有this引入,则会报错checkTime没有定义
+            d=this.checkTime(d);
+            h=this.checkTime(h);
+            m=this.checkTime(m);
+            s=this.checkTime(s);
+            // M=M>10? "0"+M : M;
+            // d=d>10? "0"+d : d;
+            // h=h>10? "0"+h : h;
+            // m=m>10? "0"+m : m;
+            // s=s>10? "0"+s : s;
+            var timer=y+'-'+M+'-'+d+' '+h+':'+m+":"+s;
+            alert(timer);
+        },
+        //笑话
+        this.jokes=function(){
+            var arr=["笑话1","笑话2","笑话3","笑话4"];
+            var ran=Math.floor(Math.random()* arr.length);
+            alert(arr[ran]);
+        },
+        //输入不合规格
+        this.default=function(){
+            alert("请输入按选项中选择");
+        }
+    }
+
+    //实例化狗蛋
+    var goudan= new GouDan();
+
+    //循环输入
+    while(true){
+        //调用狗蛋提示并赋值
+        var getMsg=goudan.ask();
+        //退出
+        if(getMsg==="q"){
+            alert("你又要去找翠花了，不要狗蛋了");
+            break;
+        }
+        switch(getMsg){
+            case '1':
+            //调用狗蛋求和
+                goudan.sum();
+            break;
+            case '2':
+            //调用狗蛋看时间
+                goudan.time();
+            break;
+            case '3':
+            //调用狗蛋看笑话
+                goudan.jokes();
+            break;
+            default:
+            //调用狗蛋提示输入不合规格
+                goudan.default();
+            break;
+        }
+        
+    }
+</script>
+</html>
